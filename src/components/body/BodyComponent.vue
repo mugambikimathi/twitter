@@ -1,8 +1,9 @@
 <template lang="pug">
   div() 
-    v-app-bar-nav-icon(@click="$emit('oclickeme')") Aplication
-    profile-component()
-    follow-component()
+    v-app-bar-nav-icon(@click="$emit('oclickeme')") 
+    | Aplication
+    profile-component.green()
+    follow-component.purple()
 </template>
 
 <script>

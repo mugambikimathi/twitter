@@ -1,9 +1,16 @@
 <template lang="pug">
-  div() Here is my trends
+  div()
+      v-form
+            v-text-field.form1(placeholder='Search Twitter', filled='' rounded='', dense='')
+            
 </template>
 
 <script>
 export default {};
 </script>
 
-<style></style>
+<style>
+.form1{
+  width: 325px;
+}
+</style>

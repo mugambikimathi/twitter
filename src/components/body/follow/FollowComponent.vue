@@ -1,5 +1,5 @@
 <template lang="pug">
-  div() Here is my trends
+  div() Follow Component
 </template>
 
 <script>

@@ -13,11 +13,11 @@ v-app#inspire
 </template>
 
 <script>
-import NavigationComponent from "@/components/navigation/NavigationComponent"
-import BodyComponent from "@/components/body/BodyComponent.vue"
-import TrendsComponent from "@/components/trends/TrendsComponent.vue"
+import NavigationComponent from "@/components/navigation/NavigationComponent";
+import BodyComponent from "@/components/body/BodyComponent.vue";
+import TrendsComponent from "@/components/trends/TrendsComponent.vue";
 export default {
-  components:{
+  components: {
     NavigationComponent,
     BodyComponent,
     TrendsComponent

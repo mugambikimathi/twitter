@@ -15,10 +15,8 @@
 
 <script>
 export default {
-  props:["drawer"]
-}
+  props: ["drawer"]
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

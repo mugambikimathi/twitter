@@ -1,5 +1,10 @@
 <template lang="pug">
-  v-list-item(link @mouseover="onMouseOver" @mouseout="onMouseOut")
+  v-list-item( 
+    @mouseover="onMouseOver" 
+    @mouseout="onMouseOut" 
+    :to="link" 
+    @click="$emit('onClicked')"
+    )
     img.mr-3(:src="getImageIcon" width="45" height="45")
     v-list-item-content
       .title(:style="titleStyle") {{title}}
@@ -10,7 +15,9 @@ export default {
   props: {
     outIcon: String,
     inIcon: String,
-    title: String
+    title: String,
+    link: String,
+    isSelected: Boolean
   },
   data: () => ({
     iconName: "home_black",
@@ -18,6 +25,9 @@ export default {
   }),
   mounted() {
     this.iconName = this.outIcon;
+    if (this.isSelected) {
+      this.onMouseOver();
+    }
   },
   computed: {
     getImageIcon: function() {
@@ -28,15 +38,15 @@ export default {
 
   methods: {
     onMouseOver: function() {
-      console.log(this.inIcon);
       this.iconName = this.inIcon;
       this.titleStyle.color = "#1DA1F2";
     },
 
     onMouseOut: function() {
-      console.log(this.outIcon);
-      this.iconName = this.outIcon;
-      this.titleStyle.color = "#333333";
+      if (this.isSelected == false) {
+        this.iconName = this.outIcon;
+        this.titleStyle.color = "#333333";
+      }
     }
   }
 };

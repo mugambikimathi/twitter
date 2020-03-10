@@ -2,7 +2,17 @@
   v-navigation-drawer(v-model='drawer' app)
    
     v-list()
-      navigation-menu-item(v-for="(menuItem,index) in menuList" :key="index" :outIcon="menuItem.outIcon" :inIcon="menuItem.inIcon" :title="menuItem.title")
+      navigation-menu-item(v-for="(menuItem,index) in menuList" 
+        :key="index" 
+        :outIcon="menuItem.outIcon" 
+        :inIcon="menuItem.inIcon" 
+        :title="menuItem.title" 
+        :link="menuItem.link" 
+        :isSelected="selectedMenu == index"
+        @onClicked="onSelectItem(index)"
+        )
+    
+    .tweetButtonNav(@click="dialog=true") Tweet
 
 </template>
 
@@ -13,25 +23,34 @@ export default {
     NavigationMenuItem
   },
   props: ["drawer"],
+
+  methods: {
+    onSelectItem: function(index) {
+      this.selectedMenu = index;
+      console.log(index);
+    }
+  },
   data: () => ({
+    dialog: false,
+    selectedMenu: 2,
     menuList: [
       {
         outIcon: "twitter_logo",
         inIcon: "twitter_logo",
         title: "Homdse",
-        link: "#"
+        link: "/"
       },
       {
         outIcon: "home_black",
         inIcon: "home_blue",
         title: "Home",
-        link: "#"
+        link: "/"
       },
       {
         outIcon: "hash_black",
         inIcon: "hash_blue",
         title: "Explore",
-        link: "#"
+        link: "/about"
       },
       {
         outIcon: "mail_black",
@@ -62,4 +81,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.tweetButtonNav {
+  color: white;
+  background-color: #1da1f2;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bolder;
+  border-radius: 45px;
+  margin: 20px 30px;
+}
+</style>

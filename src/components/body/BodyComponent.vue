@@ -1,8 +1,8 @@
 <template lang="pug">
   div() 
     v-app-bar-nav-icon(@click="$emit('oclickeme')") 
-    | Aplication
-    profile-component.green()
+    | Home
+    profile-component()
     router-view()
   
 </template>

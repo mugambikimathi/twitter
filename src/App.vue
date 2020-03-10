@@ -4,7 +4,7 @@ v-app#inspire
   v-content
     v-container(fluid)
       v-row()
-        .col-md-8.col-xs-12.blue()
+        .col-md-8.col-xs-12()
           body-component(@oclickeme="drawer = !drawer")
         .col-md-4.d-none.d-sm-none.d-md-flex.yellow()
           trends-component()

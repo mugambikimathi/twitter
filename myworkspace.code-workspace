@@ -14,7 +14,8 @@
 			{"autoFix": true, "language": "vue"},
 			{"autoFix": true, "language": "javascript"},
 		],
-
+		"editor.fontFamily": "'Droid Sans Mono for Powerline','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+		"editor.minimap.enabled": false,
 		"editor.codeActionsOnSave": {
 			"source.fixAll.eslint": true
 		}

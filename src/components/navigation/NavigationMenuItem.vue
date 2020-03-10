@@ -7,42 +7,39 @@
 
 <script>
 export default {
-  props:{
-   outIcon: String,
+  props: {
+    outIcon: String,
     inIcon: String,
-    title: String,
+    title: String
   },
-  data:()=>({
+  data: () => ({
     iconName: "home_black",
-    titleStyle: {"color": "#333333"}
+    titleStyle: { color: "#333333" }
   }),
-  mounted (){
+  mounted() {
     this.iconName = this.outIcon;
-
   },
-  computed:{
-    getImageIcon: function(){
+  computed: {
+    getImageIcon: function() {
       var images = require.context("@/assets/", false, /\.svg$/);
       return images("./" + this.iconName + ".svg");
-    
+    }
+  },
+
+  methods: {
+    onMouseOver: function() {
+      console.log(this.inIcon);
+      this.iconName = this.inIcon;
+      this.titleStyle.color = "#1DA1F2";
     },
-  },
 
-methods:{
-  
-  onMouseOver: function() {
-    console.log(this.inIcon)
-    this.iconName = this.inIcon;
-    this.titleStyle.color = "#1DA1F2"
-  },
-
-  onMouseOut: function() {
-    console.log(this.outIcon)
-    this.iconName = this.outIcon
-    this.titleStyle.color = "#333333"
+    onMouseOut: function() {
+      console.log(this.outIcon);
+      this.iconName = this.outIcon;
+      this.titleStyle.color = "#333333";
+    }
   }
-}
-}
+};
 </script>
 
 <style>
@@ -51,6 +48,6 @@ methods:{
 }
 
 .twitterTitle:hover {
-  color: #1DA1F2
+  color: #1da1f2;
 }
 </style>

@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import NavigationMenuItem from "@/components/navigation/NavigationMenuItem.vue"
+import NavigationMenuItem from "@/components/navigation/NavigationMenuItem.vue";
 export default {
-  components:{
-    NavigationMenuItem,
+  components: {
+    NavigationMenuItem
   },
   props: ["drawer"],
-  data:()=>({
-    menuList:[
+  data: () => ({
+    menuList: [
       {
         outIcon: "twitter_logo",
         inIcon: "twitter_logo",
@@ -62,8 +62,4 @@ export default {
 };
 </script>
 
-<style>
-
-
-
-</style>
+<style></style>

@@ -5,6 +5,18 @@
 		}
 	],
 	"settings": {
-		"editor.tabSize": 2
-	}
+		"emmet.triggerExpansionOnTab": true,
+		"vetur.format.defaultFormatter.html": "js-beautify-html",
+		"editor.tabSize": 2,
+		"eslint.autoFixOnSave": true,
+		"eslint.validate": [
+			"javascript",
+			{"autoFix": true, "language": "vue"},
+			{"autoFix": true, "language": "javascript"},
+		],
+
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		}
+
 }

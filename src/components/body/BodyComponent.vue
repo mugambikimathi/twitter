@@ -3,7 +3,8 @@
     v-app-bar-nav-icon(@click="$emit('oclickeme')") 
     | Aplication
     profile-component.green()
-    follow-component.purple()
+    router-view()
+  
 </template>
 
 <script>

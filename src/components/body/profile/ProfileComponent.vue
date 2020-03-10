@@ -9,13 +9,13 @@
           .col-md-9()
             .d-flex.align-center.fill-height()
               .mx-3()
-                img(src="@/assets/post_image.svg" width="35" height="35")
+                img(src="@/assets/img1.svg" width="35" height="35")
               .mx-3()
                 img(src="@/assets/post_gif.svg" width="35" height="35")
               .mx-3()
                 img(src="@/assets/post_chart.svg" width="35" height="35")
               .mx-3()
-                img(src="@/assets/post_smiley.svg" width="35" height="35")
+                img(src="@/assets/smiley1.svg" width="35" height="35")
     
           .col-md-3()
             .tweetButton(@click="postMessage") Tweet

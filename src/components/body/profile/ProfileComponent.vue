@@ -9,16 +9,18 @@
           .col-md-9()
             .d-flex.align-center.fill-height()
               .mx-3()
-                img(src="@/assets/img1.svg" width="35" height="35")
+                v-icon(:size="30" color="primary") panorama
+                
               .mx-3()
-                img(src="@/assets/post_gif.svg" width="35" height="35")
+                v-icon(:size="30" color="primary") camera
               .mx-3()
-                img(src="@/assets/post_chart.svg" width="35" height="35")
+                v-icon(:size="30" color="primary") insert_chart
               .mx-3()
-                img(src="@/assets/smiley1.svg" width="35" height="35")
+                v-icon(:size="30" color="primary") mood
     
           .col-md-3()
-            .tweetButton(@click="postMessage") Tweet
+            .d-flex.justify-end()
+              .tweetButton(@click="postMessage") Tweet
 
 </template>
 
@@ -41,11 +43,11 @@ export default {
 .tweetButton {
   color: white;
   background-color: #1da1f2;
-  padding: 10px 10px;
+  padding: 10px 30px;
   text-align: center;
   font-size: 16px;
   font-weight: bolder;
   border-radius: 45px;
-  max-width: 130px;
+  min-width: 150px;
 }
 </style>

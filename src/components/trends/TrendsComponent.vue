@@ -1,11 +1,9 @@
 <template lang="pug">
   div()
-    v-form
-      v-text-field.form1(prepend-icon="search" placeholder='Search Twitter', filled, rounded, dense)
+    //- Search Bar
+    v-text-field.form1(prepend-inner-icon="search" placeholder='Search Twitter', filled, rounded, dense)
 
-    v-card.background()
-      v-card-text.card
-        v-list-item-title.h1 Trends for you
+    
       
 
 

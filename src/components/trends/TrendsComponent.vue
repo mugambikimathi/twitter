@@ -12,8 +12,17 @@
             v-list-item-title()
               .d-flex.justify-space-between()
                 | {{item.name}}
-                v-icon(small color="black") expand_more
-            v-list-item-subtitle.text--grey() {{item.tweets}} Tweets
+                v-menu(offset-y)
+                  template(v-slot:activator="{ on }")
+                    v-icon(v-on="on") expand_more
+                  v-list()
+                  v-list-item()
+                    v-list-item-title() Send Via Direct Message
+                  v-list-item()
+                    v-list-item-title() Add tweet to bookmarks
+                  v-list-item()
+                    v-list-item-title() Copy Link to Tweet
+                    v-list-item-subtitle.text--grey() {{item.tweets}} Tweets
       .caption.primary--text(v-if="trendList.length > 3") Show More
     .wtfollow.pa-5()
       .d-flex.justify-space-between()
@@ -76,6 +85,6 @@ export default {
   border-radius: 15px;
 }
 .trendsBackground {
-  background-color: #E2EAF8;
+  background-color: #e2eaf8;
 }
 </style>

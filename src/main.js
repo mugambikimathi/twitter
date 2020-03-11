@@ -3,9 +3,14 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
+import VueTimeago from "vue-timeago";
 
 Vue.config.productionTip = false;
-
+Vue.use(require("vue-moment"));
+Vue.use(VueTimeago, {
+  name: "Timeago",
+  locale: "en"
+});
 new Vue({
   router,
   store,

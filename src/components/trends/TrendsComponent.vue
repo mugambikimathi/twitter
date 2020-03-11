@@ -2,14 +2,10 @@
   div()
     //- Search Bar
     v-text-field.form1(prepend-inner-icon="search" placeholder='Search Twitter', filled, rounded, dense)
-
-
     .trends.pa-5()
       .d-flex.justify-space-between()
         .title() Trends for you
         v-icon( color="primary") settings
-
-    
       v-list.trendsBackground(two-line)
         v-list-item(v-for="(item,index) in trendList" :key="index" @click="")
           v-list-item-content()
@@ -18,12 +14,23 @@
                 | {{item.name}}
                 v-icon(small color="black") expand_more
             v-list-item-subtitle.text--grey() {{item.tweets}} Tweets
-
       .caption.primary--text(v-if="trendList.length > 3") Show More
-
-
+    .wtfollow.pa-5()
+      .d-flex.justify-space-between()
+        .title() Who to follow
+      v-list.tfollowBackground(two-line)
+        v-list-item(v-for="(followers,index) in followList" :key="index" @click="")
+          v-list-item-content()
+            v-list-item-title()
+              .d-flex.justify-space-between()
+                v-avatar.img
+                      img(src='https://cdn.vuetifyjs.com/images/john.jpg', alt='hussein')
+                div.mx-2()
+                  | {{followers.name}}
+                  v-list-item-subtitle.text--grey() {{followers.username}}
+                v-btn(rounded='', color='primary' outlined small) follow
+      .caption.primary--text() Show More
 </template>
-
 <script>
 export default {
   data: () => ({
@@ -43,15 +50,23 @@ export default {
         tweets: 52,
         link: null
       }
+    ],
+    followList: [
+      {
+        name: "#Migunamiguna",
+        username: "@migunamiguna",
+        link: null
+      },
+      {
+        name: "Hussein Kadweka",
+        username: "@HKadweka",
+        link: null
+      }
     ]
   })
 };
 </script>
-
 <style>
-.form1 {
-  /* width: 325px; */
-}
 .trends {
   color: #000000;
   font-weight: bold;
@@ -61,6 +76,6 @@ export default {
   border-radius: 15px;
 }
 .trendsBackground {
-  background-color: #e2eaf8;
+  background-color: #E2EAF8;
 }
 </style>

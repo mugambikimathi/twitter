@@ -13,7 +13,7 @@ export default new Vuetify({
       light: {
         primary: "#1DA1F2", // #E53935
         secondary: colors.red.lighten4, // #FFCDD2
-        accent: colors.indigo.base // #3F51B5
+        accent: colors.orange // #3F51B5
       }
     }
   }

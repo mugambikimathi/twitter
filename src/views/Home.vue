@@ -5,14 +5,37 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TweetComponent from "@/components/body/follow/TweetComponent";
+
 export default {
   name: "Home",
   components: {
     TweetComponent
   },
+  mounted() {
+    axios.get("/api/post/1").then((response) =>{
+      console.log(response.data);
+      this.tweetList = response.data;
+      
+    })
+    
+  },
   data: () => ({
     tweetList: [
+      {
+        title: "BBC Africa",
+        date: new Date(),
+        message:
+          "the quick brown fox jumpes over the lazy dog. the quick brown fox jumpes over the lazy dog. the quick brown fox jumpes over the lazy dog.",
+        image:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg",
+        avatarImage:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg",
+        comment: 2,
+        retweet: 4,
+        like: 88
+      },
       {
         title: "BBC Africa",
         date: new Date(),

@@ -5,16 +5,16 @@
     //- Header
     .d-flex.justify-space-between()
       div.d-flex.align-baseline()
-        .title() {{tweet.title}}
+        .title() {{tweet.posted_by.username}}
         div.mx-2()
           v-icon(color="primary") check_circle
-        timeago.sub-title.grey--text(:datetime="tweet.date")
+        timeago.sub-title.grey--text(:datetime="tweet.UpdatedAt")
       v-icon() expand_more
 
     //- Body
     div.my-2()
-      div() Here is some text.The quick brown fox jumpes over the lazy dog. Here is some text.The quick brown fox jumpes over the lazy dog. Here is some text.The quick brown fox jumpes over the lazy dog. Here is some text.The quick brown fox jumpes over the lazy dog. 
-      div.tweetImage(:style="{'background-image':'url(' + tweet.image+ ')'}")
+      div() {{tweet.message}}
+      div.tweetImage(v-if="tweet.image"   :style="{'background-image':'url(' + tweet.image+ ')'}")
       
     //- Footer
     .d-flex.justify-space-around()
@@ -28,7 +28,7 @@
         v-icon() call
         div.mx-2() 88
       .d-flex()
-        v-menu(offset-y)
+        v-menu.raiseUp(offset-y)
           template(v-slot:activator="{ on }")
             v-icon(v-on="on") expand_more
           v-list()
@@ -87,5 +87,9 @@ export default {
   background-repeat: no-repeat;
   border-radius: 20px;
   background-position: center;
+}
+
+.raiseUp {
+  z-index: 999;
 }
 </style>

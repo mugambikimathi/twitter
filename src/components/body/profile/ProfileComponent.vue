@@ -25,15 +25,27 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data: () => ({
     post: null
   }),
   methods: {
     postMessage: function() {
-      console.log(`the meaage is ${this.post}`);
+  
       // put in the functionality to post a message
-      this.post = null;
+     
+      if (this.post != null){
+        let postData = {
+	"posted_by_id": 1,
+	"message":this.post
+	
+}
+        axios.post("/api/post",postData).then((response)=>{
+          console.log(response.data);
+           this.post = null;
+        })
+      }
     }
   }
 };

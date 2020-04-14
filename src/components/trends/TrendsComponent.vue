@@ -26,7 +26,7 @@
       .caption.primary--text(v-if="trendList.length > 3") Show More
     .wtfollow.pa-5()
       .d-flex.justify-space-between()
-        .title() Who to follow
+        .title() Sugested Followers
       v-list.tfollowBackground(two-line)
         v-list-item(v-for="(followers,index) in followList" :key="index" @click="")
           v-list-item-content()
@@ -37,11 +37,18 @@
                 div.mx-2()
                   | {{followers.name}}
                   v-list-item-subtitle.text--grey() {{followers.username}}
-                v-btn(rounded='', color='primary' outlined small) follow
+                v-btn(rounded='', color='primary' outlined x-small) un-follow
       .caption.primary--text() Show More
 </template>
 <script>
+import axios from "axios";
 export default {
+  mounted() {
+    // get the list the user has subscribed to
+    axios.get(`/api/user/${this.user_id}`).then(response => {
+      console.log(response.data);
+    });
+  },
   data: () => ({
     trendList: [
       {

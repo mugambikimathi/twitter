@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-navigation-drawer(v-model='drawer' app)
+  v-navigation-drawer(v-model='theDrawer' app)
    
     v-list()
       navigation-menu-item(v-for="(menuItem,index) in menuList" 
@@ -30,7 +30,15 @@ export default {
       console.log(index);
     }
   },
+
+  watch: {
+    drawer: function(value){
+      this.theDrawer = value;
+    }
+  },
+
   data: () => ({
+    theDrawer: true,
     dialog: false,
     selectedMenu: 2,
     menuList: [
@@ -68,13 +76,13 @@ export default {
         outIcon: "notes_black",
         inIcon: "notes_blue",
         title: "List",
-        link: "#"
+        link: "/list"
       },
       {
         outIcon: "person_black",
         inIcon: "person_blue",
         title: "Profile",
-        link: "#"
+        link: "/profile"
       }
     ]
   })

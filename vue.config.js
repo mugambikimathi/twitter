@@ -10,5 +10,4 @@ module.exports = {
     },
     allowedHosts: ["vststudios.ddns.net", "localhost", "0.0.0.0"]
   }
-
 };

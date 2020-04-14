@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import TweetComponent from "@/components/body/follow/TweetComponent";
 
 export default {
@@ -14,12 +14,10 @@ export default {
     TweetComponent
   },
   mounted() {
-    axios.get("/api/post/1").then((response) =>{
+    axios.get("/api/post/1").then(response => {
       console.log(response.data);
       this.tweetList = response.data;
-      
-    })
-    
+    });
   },
   data: () => ({
     tweetList: [

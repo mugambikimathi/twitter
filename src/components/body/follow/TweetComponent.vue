@@ -1,6 +1,6 @@
 <template lang="pug">
-.d-flex.mt-8()
-  div.pictureicon(:style="{'background-image':'url(' + tweet.avatarImage+ ')'}")
+.d-flex.mt-8(v-if="tweet.posted_by")
+  div.pictureicon(v-if="pictureIcon" :style="{'background-image':'url(' + tweet.avatarImage+ ')'}")
   .bodyTweet.mx-3()
     //- Header
     .d-flex.justify-space-between()
@@ -56,11 +56,12 @@ export default {
       return temp;
     }
   },
-  data: () => ({}),
+  data: () => ({
+    pictureIcon: {},
+  }),
 
   mounted() {
-    this.pictureIcon["background-image"] =
-      "url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg')";
+    this.pictureIcon["background-image"] = "url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg')";
   }
 };
 </script>

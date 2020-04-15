@@ -28,26 +28,30 @@
       .d-flex.justify-space-between()
         .title() Sugested Followers
       v-list.tfollowBackground(two-line)
-        v-list-item(v-for="(followers,index) in followList" :key="index" @click="")
+        v-list-item(v-for="(user,index) in $store.state.allUsers" :key="index" @click="")
           v-list-item-content()
             v-list-item-title()
               .d-flex.justify-space-between()
                 v-avatar.img
                       img(src='https://cdn.vuetifyjs.com/images/john.jpg', alt='hussein')
                 div.mx-2()
-                  | {{followers.name}}
-                  v-list-item-subtitle.text--grey() {{followers.username}}
-                v-btn(rounded='', color='primary' outlined x-small) un-follow
+                  | {{user.first_name}} {{user.last_name}}
+                  v-list-item-subtitle.text--grey() {{user.username}}
+                v-btn(rounded='', color='primary' outlined x-small @click="subscribeTo(user.ID)") follow
       .caption.primary--text() Show More
 </template>
 <script>
-import axios from "axios";
+//
 export default {
   mounted() {
     // get the list the user has subscribed to
-    axios.get(`/api/user/${this.user_id}`).then(response => {
-      console.log(response.data);
-    });
+    this.$store.dispatch("allUsersFromServer");
+  },
+  methods: {
+    // subscribe to the user
+    subscribeTo: function(subscribeToID) {
+      this.$store.dispatch("subscibeTo", subscribeToID);
+    }
   },
   data: () => ({
     trendList: [
@@ -64,18 +68,6 @@ export default {
       {
         name: "#Premier League",
         tweets: 52,
-        link: null
-      }
-    ],
-    followList: [
-      {
-        name: "#Migunamiguna",
-        username: "@migunamiguna",
-        link: null
-      },
-      {
-        name: "Hussein Kadweka",
-        username: "@HKadweka",
         link: null
       }
     ]

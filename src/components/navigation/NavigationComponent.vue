@@ -32,7 +32,7 @@ export default {
   },
 
   watch: {
-    drawer: function(value){
+    drawer: function(value) {
       this.theDrawer = value;
     }
   },

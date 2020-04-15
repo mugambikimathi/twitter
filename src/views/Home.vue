@@ -14,7 +14,7 @@ export default {
     TweetComponent
   },
   mounted() {
-    axios.get("/api/post/1").then(response => {
+    axios.get(`/api/post/${this.$store.state.currentID}`).then(response => {
       console.log(response.data);
       this.tweetList = response.data;
     });

@@ -3,7 +3,7 @@
       .d-flex.justify-space-between()
         .title() Following
       v-list.tfollowBackground(two-line)
-        v-list-item(v-for="(followers,index) in followList" :key="index" @click="")
+        v-list-item(v-for="(followers,index) in $store.getters['getFollowers']" :key="index" @click="")
           v-list-item-content()
             v-list-item-title()
               .d-flex.justify-space-between()
@@ -13,48 +13,29 @@
                   | {{followers.first_name}} {{followers.last_name}}
                   v-list-item-subtitle.text--grey( v-text="followers.username + ' #'+ followers.ID") 
                 v-spacer()
-                v-btn(rounded='', color='primary' outlined x-small @click="onSubscribe(followers.ID)") follow
+                v-btn(rounded='', color='primary' outlined x-small @click="onSubscribe(followers.ID)") un-follow
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  data: ()=> ({
-     followList: [
-      {
-        name: "#Migunamiguna",
-        username: "@migunamiguna",
-        link: null
-      },
-      {
-        name: "Hussein Kadweka",
-        username: "@HKadweka",
-        link: null
-      }
-    ]
-  }),
+  data: () => ({}),
   mounted() {
-    axios.get(`/api/user`).then(response => {
-      console.log(response.data);
-      this.followList = response.data
-    });
+    this.$store.dispatch("allCurrentUsersSubscriptions");
   },
   methods: {
-    onSubscribe: function(theID){
+    onSubscribe: function(theID) {
       console.log(theID);
       let subscriptionObj = {
-        user_id:1,
+        user_id: 1,
         subscriber_user_id: theID
-      }
-      axios.post(`/api/subscription`,subscriptionObj).then(response => {
-      console.log(response.data);
-      
-    });
+      };
+      axios.post(`/api/subscription`, subscriptionObj).then(response => {
+        console.log(response.data);
+      });
     }
   }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -7,8 +7,9 @@
         .title() Trends for you
         v-icon( color="primary") settings
       v-list.trendsBackground(two-line)
-        v-list-item(v-for="(item,index) in trendList" :key="index" @click="")
-          v-list-item-content()
+        v-list-item(v-for="(item,index) in trendList" :key="id" @click="")
+
+          v-list-item-content() {{index}}
             v-list-item-title()
               .d-flex.justify-space-between()
                 | {{item.name}}
@@ -54,23 +55,7 @@ export default {
     }
   },
   data: () => ({
-    trendList: [
-      {
-        name: "#CoronaVirusUpdate",
-        tweets: 1456,
-        link: null
-      },
-      {
-        name: "#Joe Biden",
-        tweets: 304,
-        link: null
-      },
-      {
-        name: "#Premier League",
-        tweets: 52,
-        link: null
-      }
-    ]
+    trendList: []
   })
 };
 </script>

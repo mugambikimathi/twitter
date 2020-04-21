@@ -8,11 +8,22 @@
         v-row()
           .col-md-9()
             .d-flex.align-center.fill-height()
-              .mx-3()
-                v-icon(:size="30" color="primary") panorama
+              
                 
               .mx-3()
+                v-dialog(v-model="dialog" width="500")
+                  template(v-slot:activator="{ on }")
+                    v-icon(:size="30" color="primary" v-on="on") panorama
+                  v-card()
+
+                    v-container()
+                      .subtitle-1() File Upload
+                      v-file-input(v-model="file" accept="image/*"  label="File input")
+                      v-btn(color="primary" small @click="uploadFile") submit
+
+              .mx-3()
                 v-icon(:size="30" color="primary") camera
+
               .mx-3()
                 v-icon(:size="30" color="primary") insert_chart
               .mx-3()
@@ -21,6 +32,10 @@
           .col-md-3()
             .d-flex.justify-end()
               .tweetButton(@click="postMessage") Tweet
+        .caption(v-if="uploadedFile") Uploaded File is: {{this.uploadedFile}}
+            
+        v-row()
+          
 
 </template>
 
@@ -28,7 +43,10 @@
 import axios from "axios";
 export default {
   data: () => ({
-    post: null
+    dialog: false,
+    post: null,
+    file: null,
+    uploadedFile: null
   }),
   methods: {
     postMessage: function() {
@@ -37,13 +55,39 @@ export default {
       if (this.post != null) {
         let postData = {
           posted_by_id: 1,
-          message: this.post
+          message: this.post,
+          image: this.uploadedFile
         };
         axios.post("/api/post", postData).then(response => {
           console.log(response.data);
           this.post = null;
+          this.$store.dispatch("loadUsersPosts");
         });
       }
+    },
+
+    uploadFile: function() {
+      // console.log(this.file);
+      let formData = new FormData();
+      formData.append("file", this.file);
+      formData.append("name", this.fileName);
+      formData.append("type", this.fileType);
+      formData.append("description", this.description);
+
+      axios
+        .post("/api/post/uploadImage", formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+        .then(payload => {
+          console.log("success uploading");
+          console.log(payload.data);
+          this.uploadedFile = payload.data.name;
+          this.file = null;
+          this.dialog = false;
+        })
+        .catch(payload => {
+          console.log(payload);
+        });
     }
   }
 };

@@ -14,7 +14,7 @@
     //- Body
     div.my-2()
       div() {{tweet.message}}
-      div.tweetImage(v-if="tweet.image"   :style="{'background-image':'url(' + tweet.image+ ')'}")
+      div.tweetImage(v-if="tweet.image"   :style="{'background-image':'url(/media/' + tweet.image+ ')'}")
       
     //- Footer
     .d-flex.justify-space-around()

@@ -1,11 +1,10 @@
 <template lang="pug">
   .tweetPanel()
-    tweet-component(v-for="(tweet,index) in tweetList" :key="index" :tweet="tweet")
+    tweet-component(v-for="(tweet,index) in $store.state.posts" :key="index" :tweet="tweet")
 
 </template>
 
 <script>
-import axios from "axios";
 import TweetComponent from "@/components/body/follow/TweetComponent";
 
 export default {
@@ -14,41 +13,9 @@ export default {
     TweetComponent
   },
   mounted() {
-    axios.get(`/api/post/${this.$store.state.currentID}`).then(response => {
-      console.log(response.data);
-      this.tweetList = response.data;
-    });
+    this.$store.dispatch("loadUsersPosts");
   },
-  data: () => ({
-    tweetList: [
-      {
-        title: "BBC Africa",
-        date: new Date(),
-        message:
-          "the quick brown fox jumpes over the lazy dog. the quick brown fox jumpes over the lazy dog. the quick brown fox jumpes over the lazy dog.",
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg",
-        avatarImage:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg",
-        comment: 2,
-        retweet: 4,
-        like: 88
-      },
-      {
-        title: "BBC Africa",
-        date: new Date(),
-        message:
-          "the quick brown fox jumpes over the lazy dog. the quick brown fox jumpes over the lazy dog. the quick brown fox jumpes over the lazy dog.",
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg",
-        avatarImage:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/1200px-Lion_waiting_in_Namibia.jpg",
-        comment: 2,
-        retweet: 4,
-        like: 88
-      }
-    ]
-  })
+  data: () => ({})
 };
 </script>
 <style scoped>

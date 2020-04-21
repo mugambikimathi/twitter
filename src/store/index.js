@@ -19,20 +19,21 @@ export default new Vuex.Store({
         link: null
       }
     ],
-    subscribedList: []
+    subscribedList: [],
+    posts: []
   },
   getters: {
     getFollowers: state => {
-      let myList = []
-      for(var i=0; i<state.allUsers.length; i++){
-          for(var j=0; j<state.subscribedList.length; j++){
-            if(state.allUsers[i].ID == state.subscribedList[j].subscriber_user_id){
-              myList.push(state.allUsers[i]);
-            }
+      let myList = [];
+      for (var i = 0; i < state.allUsers.length; i++) {
+        for (var j = 0; j < state.subscribedList.length; j++) {
+          if (
+            state.allUsers[i].ID == state.subscribedList[j].subscriber_user_id
+          ) {
+            myList.push(state.allUsers[i]);
           }
+        }
       }
-
-
 
       return myList;
     }
@@ -40,49 +41,54 @@ export default new Vuex.Store({
 
   mutations: {
     allUsersCommit(state, payload) {
-      state.allUsers = payload
+      state.allUsers = payload;
     },
 
-    afterSubscription(){
+    afterSubscription() {},
 
+    setSubscriptionList(state, payload) {
+      state.subscribedList = payload;
     },
 
-    setSubscriptionList(state,payload) {
-      state.subscribedList = payload
+    loadUsersPosts(state, payload) {
+      state.posts = payload;
     }
   },
 
   actions: {
+    loadUsersPosts({ commit, state }) {
+      axios.get(`/api/post/${state.currentID}`).then(response => {
+        commit("loadUsersPosts", response.data);
+      });
+    },
+
     // get all users from the system
-    allUsersFromServer ({ commit }) {
+    allUsersFromServer({ commit }) {
       axios.get(`/api/user`).then(response => {
-        commit("allUsersCommit",response.data);
+        commit("allUsersCommit", response.data);
       });
     },
 
     // subscibing to a user
-    subscibeTo({commit,state}, subcribeToID){
+    subscibeTo({ commit, state }, subcribeToID) {
       console.log(subcribeToID);
       let subObj = {
         user_id: state.currentID,
         subscriber_user_id: subcribeToID
-      }
-      axios.post(`/api/subscription`,subObj).then(response => {
-        console.log(response.data)
+      };
+      axios.post(`/api/subscription`, subObj).then(response => {
+        console.log(response.data);
         // commit("allUsersCommit",response.data);
       });
-      commit("afterSubscription")
-     
+      commit("afterSubscription");
     },
 
     // Get all subscriptions from the current users
-    allCurrentUsersSubscriptions({commit,state}){
+    allCurrentUsersSubscriptions({ commit, state }) {
       console.log(state.currentID);
-      axios.get(`/api/subscription/${state.currentID}`).then( response => {
-        commit("setSubscriptionList",response.data)
-      }
-       
-      )
+      axios.get(`/api/subscription/${state.currentID}`).then(response => {
+        commit("setSubscriptionList", response.data);
+      });
     }
   },
   modules: {}

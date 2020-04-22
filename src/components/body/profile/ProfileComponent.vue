@@ -1,40 +1,34 @@
 <template lang="pug">
-  .d-flex.flex-column()
+  .d-flex.flex-column.tweetInput()
     .d-flex()
       img.mr-3(src="@/assets/person_black.svg" width="80" height="80")
       v-text-field(v-model='post', hint="Whats Happening?", label="Whats Happening" persistent-hint )
     .d-flex()
        v-container()
+        v-row(v-if="uploadedFile")
+          div.tweetImage(:style="{'background-image':'url(/media/' + uploadedFile+ ')'}")
         v-row()
           .col-md-9()
             .d-flex.align-center.fill-height()
-              
-                
               .mx-3()
-                v-dialog(v-model="dialog" width="500")
-                  template(v-slot:activator="{ on }")
-                    v-icon(:size="30" color="primary" v-on="on") panorama
-                  v-card()
-
-                    v-container()
-                      .subtitle-1() File Upload
-                      v-file-input(v-model="file" accept="image/*"  label="File input")
-                      v-btn(color="primary" small @click="uploadFile") submit
-
+                label(for="upload")
+                  v-icon.hoverBtn(:size="30" color="primary") panorama
+                  v-file-input(v-model="file" type="file" id="upload" style="display:none" @change="uploadFile()" )
+      
               .mx-3()
-                v-icon(:size="30" color="primary") camera
-
+                v-icon.hoverBtn(:size="30" color="primary") insert_chart
               .mx-3()
-                v-icon(:size="30" color="primary") insert_chart
-              .mx-3()
-                v-icon(:size="30" color="primary") mood
+                v-icon.hoverBtn(:size="30" color="primary") mood
     
           .col-md-3()
             .d-flex.justify-end()
               .tweetButton(@click="postMessage") Tweet
-        .caption(v-if="uploadedFile") Uploaded File is: {{this.uploadedFile}}
+      
+        
             
-        v-row()
+       
+          
+        
           
 
 </template>
@@ -61,12 +55,18 @@ export default {
         axios.post("/api/post", postData).then(response => {
           console.log(response.data);
           this.post = null;
-          this.$store.dispatch("loadUsersPosts");
+          this.$store.dispatch("loadUsersPosts").then(() => {
+            this.uploadedFile = null;
+            this.file = null;
+          });
         });
       }
     },
 
     uploadFile: function() {
+      if (this.file == null) {
+        return;
+      }
       // console.log(this.file);
       let formData = new FormData();
       formData.append("file", this.file);
@@ -94,6 +94,11 @@ export default {
 </script>
 
 <style>
+.tweetInput {
+  border-bottom: 2px solid #1da1f2;
+  margin-bottom: 40px;
+}
+
 .tweetButton {
   color: white;
   background-color: #1da1f2;
@@ -103,5 +108,22 @@ export default {
   font-weight: bolder;
   border-radius: 45px;
   min-width: 150px;
+}
+
+.tweetButton:hover {
+  cursor: pointer;
+}
+
+.hoverBtn:hover {
+  cursor: pointer;
+}
+.tweetImage {
+  width: 100%;
+  margin: 20px 0px 15px 0px;
+  min-height: 300px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  background-position: center;
 }
 </style>

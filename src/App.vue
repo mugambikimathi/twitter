@@ -1,5 +1,5 @@
 <template lang="pug">
-v-app#inspire
+v-app#inspire.mainBody()
   navigation-component(:drawer="drawer")
   v-content
     v-container(fluid)
@@ -30,3 +30,9 @@ export default {
   })
 };
 </script>
+<style lang="stylus">
+.mainBody {
+  max-width 1600px;
+  margin (0 auto);
+}
+</style>

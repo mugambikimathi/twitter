@@ -52,6 +52,11 @@ export default new Vuex.Store({
 
     loadUsersPosts(state, payload) {
       state.posts = payload;
+    },
+
+    deletePost(state, payload) {
+      let theIndex = state.posts.findIndex(item => item.ID == payload.ID);
+      state.posts.splice(theIndex, 1);
     }
   },
 
@@ -59,6 +64,12 @@ export default new Vuex.Store({
     loadUsersPosts({ commit, state }) {
       axios.get(`/api/post/${state.currentID}`).then(response => {
         commit("loadUsersPosts", response.data);
+      });
+    },
+
+    deletePost({ commit }, payload) {
+      axios.delete(`/api/post/${payload}`).then(response => {
+        commit("deletePost", response.data);
       });
     },
 

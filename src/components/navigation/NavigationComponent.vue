@@ -1,18 +1,19 @@
 <template lang="pug">
-  v-navigation-drawer(v-model='theDrawer' app)
-   
-    v-list()
-      navigation-menu-item(v-for="(menuItem,index) in menuList" 
-        :key="index" 
-        :outIcon="menuItem.outIcon" 
-        :inIcon="menuItem.inIcon" 
-        :title="menuItem.title" 
-        :link="menuItem.link" 
-        :isSelected="selectedMenu == index"
-        @onClicked="onSelectItem(index)"
-        )
-    
-    .tweetButtonNav(@click="dialog=true") Tweet
+  .navigationColumn()
+    div()
+      v-list()
+        navigation-menu-item(v-for="(menuItem,index) in menuList" 
+          :key="index" 
+          :outIcon="menuItem.outIcon" 
+          :inIcon="menuItem.inIcon" 
+          :title="menuItem.title" 
+          :link="menuItem.link" 
+          :isSelected="selectedMenu == index"
+          @onClicked="onSelectItem(index)"
+          )
+      
+      .tweetButtonNav(@click="dialog=true") Tweet
+    .subtitle-2.primary--text() {{this.$store.state.currentUser.first_name}} {{this.$store.state.currentUser.last_name}} 
 
 </template>
 
@@ -22,7 +23,7 @@ export default {
   components: {
     NavigationMenuItem
   },
-  props: ["drawer"],
+  props: [],
 
   methods: {
     onSelectItem: function(index) {
@@ -45,14 +46,14 @@ export default {
       {
         outIcon: "twitter_logo",
         inIcon: "twitter_logo",
-        title: "Homdse",
-        link: "/"
+        title: "Home",
+        link: "/main"
       },
       {
         outIcon: "home_black",
         inIcon: "home_blue",
         title: "Home",
-        link: "/"
+        link: "/main"
       },
       {
         outIcon: "hash_black",
@@ -90,6 +91,13 @@ export default {
 </script>
 
 <style>
+.navigationColumn {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .tweetButtonNav {
   color: white;
   background-color: #1da1f2;

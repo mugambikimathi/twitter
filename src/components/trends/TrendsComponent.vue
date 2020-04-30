@@ -1,7 +1,9 @@
 <template lang="pug">
   div()
     //- Search Bar
-    v-text-field.form1(prepend-inner-icon="search" placeholder='Search Twitter', filled, rounded, dense)
+    .topRightDiv()
+      v-text-field.form1(prepend-inner-icon="search" placeholder='Search Twitter', filled, rounded, dense)
+      .SignOutButton(@click="onSignOut" style="width:200px") Sign Out
     .trends.pa-5()
       .d-flex.justify-space-between()
         .title() Trends for you
@@ -29,7 +31,7 @@
       .d-flex.justify-space-between()
         .title() Sugested Followers
       v-list.tfollowBackground(two-line)
-        v-list-item(v-for="(user,index) in $store.state.allUsers" :key="index" @click="")
+        v-list-item(v-for="(user,index) in $store.getters['suggestedFollowers']" :key="index" @click="")
           v-list-item-content()
             v-list-item-title()
               .d-flex.justify-space-between()
@@ -49,6 +51,11 @@ export default {
     this.$store.dispatch("allUsersFromServer");
   },
   methods: {
+    onSignOut: function() {
+      this.$store.commit("signOut");
+      this.$router.push({ name: "Login" });
+    },
+
     // subscribe to the user
     subscribeTo: function(subscribeToID) {
       this.$store.dispatch("subscibeTo", subscribeToID);
@@ -70,5 +77,22 @@ export default {
 }
 .trendsBackground {
   background-color: #e2eaf8;
+}
+
+.topRightDiv {
+  display: flex;
+  align-items: flex-start;
+}
+
+.SignOutButton {
+  color: white;
+  background-color: #1da1f2;
+  padding: 7px 7px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bolder;
+  border-radius: 45px;
+  margin: 0px 10px;
+  cursor: pointer;
 }
 </style>

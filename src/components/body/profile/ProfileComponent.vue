@@ -19,7 +19,7 @@
                 v-icon.hoverBtn(:size="30" color="primary") insert_chart
               .mx-3()
                 v-icon.hoverBtn(:size="30" color="primary") mood
-    
+
           .col-md-3()
             .d-flex.justify-end()
               .tweetButton(@click="postMessage") Tweet

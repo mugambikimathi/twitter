@@ -13,7 +13,7 @@ export default {
     TweetComponent
   },
   mounted() {
-    this.$store.dispatch("loadUsersPosts");
+    console.log(this.$store.state.posts);
   },
   data: () => ({})
 };
